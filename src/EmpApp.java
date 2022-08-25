@@ -5,9 +5,9 @@ import java.util.ListIterator;
 import java.util.Scanner;
 
 class Worker{
-    private final int workerNumber;
-    private final String workerName;
-    private final int workerSalary;
+    private final int workerNumber; // Worker Number will begin with 100x, whereas x will be a number beginning with 1 to ∞
+    private final String workerName; // Worker Name should be Full First and Last with Middle intial.
+    private final int workerSalary; // Worker Salary will be the Annual yearly salary.
 
     Worker(int workerNumber, String workerName, int workerSalary) {
         this.workerNumber = workerNumber;
