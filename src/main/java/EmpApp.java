@@ -1,3 +1,4 @@
+package main.java;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -45,11 +46,11 @@ class EmpApp {
             try (Scanner s1 = new Scanner(System.in)) {
                 int di;
                 do {
-                    System.out.println("1.INSERT Data for Worker(s)");
-                    System.out.println("2.DISPLAY Data for Worker(s)");
-                    System.out.println("3.SEARCH Data of Worker(s)");
-                    System.out.println("4.DELETE Data of Worker(s)");
-                    System.out.println("5.UPDATE Data for Worker(s)");
+                    System.out.println("1.INSERT Data for Worker(s)"); // User will Insert(create number) 3 varibles, Workers Number, Workers name, Workers Salary
+                    System.out.println("2.DISPLAY Data for Worker(s)"); // User can display all Created Workers
+                    System.out.println("3.SEARCH Data of Worker(s)"); // User can search database for Workers
+                    System.out.println("4.DELETE Data of Worker(s)"); // User can Delete any Worker in the system
+                    System.out.println("5.UPDATE Data for Worker(s)");// User can update any information on Worker
                     System.out.println("Enter 0 to Exit");
                     System.out.print("Enter Number of Your Choice: ");
                     di = s.nextInt();
