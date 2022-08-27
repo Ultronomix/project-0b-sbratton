@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch EmpApp",
+            "request": "launch",
+            "mainClass": "com.p0a.cameramanbrayton.workers.EmpApp",
+            "projectName": "workers-app"
+        },
+        {
+            "type": "java",
             "name": "Attach",
             "request": "attach",
             "hostName": "localhost",
