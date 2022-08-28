@@ -35,9 +35,6 @@ class EmpApp {
     }
 
     public static void main(String[] args) {
-
-        ConnectionFactory connectionFactory = ConnectionFactory.getInstance();
-
         // try with resources
         try (Connection connection = ConnectionFactory.getInstance().getConnection()) {
             if (connection != null) {
