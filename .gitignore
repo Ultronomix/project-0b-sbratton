@@ -1,3 +1,4 @@
-!/.idea/
-!/.vscode/
-!/src/main/Resources/application.properties
+target
+.idea
+.vscode
+/src/main/Resources/application.properties
