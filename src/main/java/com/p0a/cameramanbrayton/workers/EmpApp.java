@@ -36,21 +36,17 @@ class EmpApp {
 
     public static void main(String[] args) {
 
-        try {
-            Properties dbProps = new Properties();
-            dbProps.load(new FileReader("src/main/Resources/application.properties"));
+        ConnectionFactory connectionFactory = ConnectionFactory.getInstance();
 
-            Connection conn = DriverManager.getConnection(dbProps.getProperty("db-url"),
-                    dbProps.getProperty("db-username"), dbProps.getProperty("db-password"));
-            if (conn != null) {
-            System.out.println("Connection successful!");
+        // try with resources
+        try (Connection connection = ConnectionFactory.getInstance().getConnection()) {
+            if (connection != null) {
+                System.out.println("Connection successful!");
             }
-        } catch (IOException e) {
-            System.err.println("Could not read from properties file!");
         } catch (SQLException e) {
-            System.err.println("Could not establish a connection");
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
+
         List<Worker> workerCollection = new ArrayList<>();
         try (Scanner s = new Scanner(System.in)) {
             try (Scanner s1 = new Scanner(System.in)) {
