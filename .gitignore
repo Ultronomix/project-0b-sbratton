@@ -1,4 +1,7 @@
-target
-.idea
-!/src/main/Resources/application.properties
-.vscodeS
+target/
+.idea/
+application.properties
+.vscode/
+
+*.class
+*.jar
