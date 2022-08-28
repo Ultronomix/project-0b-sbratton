@@ -1,5 +1,8 @@
 package com.p0a.cameramanbrayton.workers;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -33,14 +36,17 @@ class EmpApp {
 
     public static void main(String[] args) {
 
-        String dbUrl = "jdbc:postgresql://java-angular-220815.cuuno41ql544.us-east-1.rds.amazonaws.com:5432/postgres?currentSchema=workersapp";
-        String dbUsername = "scott";
-        String dbPassword = "revature";
         try {
-            Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+            Properties dbProps = new Properties();
+            dbProps.load(new FileReader("src/main/Resources/application.properties"));
+
+            Connection conn = DriverManager.getConnection(dbProps.getProperty("db-url"),
+                    dbProps.getProperty("db-username"), dbProps.getProperty("db-password"));
             if (conn != null) {
             System.out.println("Connection successful!");
             }
+        } catch (IOException e) {
+            System.err.println("Could not read from properties file!");
         } catch (SQLException e) {
             System.err.println("Could not establish a connection");
             e.printStackTrace();
