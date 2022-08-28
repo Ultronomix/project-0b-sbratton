@@ -1,4 +1,4 @@
 target
 .idea
-.vscode
-src/main/Resources/application.properties
+!/src/main/Resources/application.properties
+.vscodeS
