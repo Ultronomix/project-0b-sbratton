@@ -1,17 +1,13 @@
 package com.p0a.cameramanbrayton.workers;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Scanner;
-import org.postgresql.Driver;
+import java.util.*;
 
 class Worker{
     private final int workerNumber; // Worker Number will begin with 100x, whereas x will be a number beginning with 1 to ∞
-    private final String workerName; // Worker Name should be Full First and Last with Middle intial.
+    private final String workerName; // Worker Name should be Full First and Last with Middle initial.
     private final int workerSalary; // Worker Salary will be the Annual yearly salary.
 
     Worker(int workerNumber, String workerName, int workerSalary) {
@@ -24,14 +20,6 @@ class Worker{
         return workerNumber;
     }
 
-    public int getWorkerSalary(){
-        return workerSalary;
-    }
-
-    public String getWorkerName(){
-        return workerName;
-    }
-
     public String toString(){
         return "Worker's Number:" + workerNumber + "/  " + "Worker's Name:" + workerName + "/  " + "Worker's Annual Salary:" + workerSalary;
     }
@@ -39,7 +27,7 @@ class Worker{
 }
 
 class EmpApp {
-    public EmpApp(int workerNumber, String workerName, int workerSalary) {
+    public EmpApp() {
 
     }
 
@@ -57,12 +45,12 @@ class EmpApp {
             System.err.println("Could not establish a connection");
             e.printStackTrace();
         }
-        List<Worker> workerCollection = new ArrayList<Worker>();
+        List<Worker> workerCollection = new ArrayList<>();
         try (Scanner s = new Scanner(System.in)) {
             try (Scanner s1 = new Scanner(System.in)) {
                 int di;
                 do {
-                    System.out.println("1.INSERT Data for Worker(s)"); // User will Insert(create number) 3 varibles, Workers Number, Workers name, Workers Salary
+                    System.out.println("1.INSERT Data for Worker(s)"); // User will Insert(create number) 3 variables, Workers Number, Workers name, Workers Salary
                     System.out.println("2.DISPLAY Data for Worker(s)"); // User can display all Created Workers
                     System.out.println("3.SEARCH Data of Worker(s)"); // User can search database for Workers
                     System.out.println("4.DELETE Data of Worker(s)"); // User can Delete any Worker in the system

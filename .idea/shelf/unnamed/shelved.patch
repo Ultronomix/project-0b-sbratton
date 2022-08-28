@@ -1,0 +1,178 @@
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+new file mode 100644
+--- /dev/null	(date 1661668196281)
++++ b/.idea/misc.xml	(date 1661668196281)
+@@ -0,0 +1,12 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ExternalStorageConfigurationManager" enabled="true" />
++  <component name="MavenProjectsManager">
++    <option name="originalFiles">
++      <list>
++        <option value="$PROJECT_DIR$/pom.xml" />
++      </list>
++    </option>
++  </component>
++  <component name="ProjectRootManager" version="2" project-jdk-name="18" project-jdk-type="JavaSDK" />
++</project>
+\ No newline at end of file
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1661665198493)
++++ b/.idea/vcs.xml	(date 1661665198493)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: src/main/java/com/p0a/cameramanbrayton/workers/EmpApp.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.p0a.cameramanbrayton.workers;\r\nimport java.sql.Connection;\r\nimport java.sql.DriverManager;\r\nimport java.sql.SQLException;\r\nimport java.util.ArrayList;\r\nimport java.util.Iterator;\r\nimport java.util.List;\r\nimport java.util.ListIterator;\r\nimport java.util.Scanner;\r\nimport org.postgresql.Driver;\r\n\r\nclass Worker{\r\n    private final int workerNumber; // Worker Number will begin with 100x, whereas x will be a number beginning with 1 to ∞\r\n    private final String workerName; // Worker Name should be Full First and Last with Middle intial.\r\n    private final int workerSalary; // Worker Salary will be the Annual yearly salary.\r\n\r\n    Worker(int workerNumber, String workerName, int workerSalary) {\r\n        this.workerNumber = workerNumber;\r\n        this.workerName = workerName;\r\n        this.workerSalary = workerSalary;\r\n    }\r\n\r\n    public int getWorkerNumber(){\r\n        return workerNumber;\r\n    }\r\n\r\n    public int getWorkerSalary(){\r\n        return workerSalary;\r\n    }\r\n\r\n    public String getWorkerName(){\r\n        return workerName;\r\n    }\r\n\r\n    public String toString(){\r\n        return \"Worker's Number:\" + workerNumber + \"/  \" + \"Worker's Name:\" + workerName + \"/  \" + \"Worker's Annual Salary:\" + workerSalary;\r\n    }\r\n\r\n}\r\n\r\nclass EmpApp {\r\n    public EmpApp(int workerNumber, String workerName, int workerSalary) {\r\n\r\n    }\r\n\r\n    public static void main(String[] args) {\r\n\r\n        String dbUrl = \"jdbc:postgresql://java-angular-220815.cuuno41ql544.us-east-1.rds.amazonaws.com:5432/postgres?currentSchema=workersapp\";\r\n        String dbUsername = \"scott\";\r\n        String dbPassword = \"revature\";\r\n        try {\r\n            Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);\r\n            if (conn != null) {\r\n            System.out.println(\"Connection successful!\");\r\n            }\r\n        } catch (SQLException e) {\r\n            System.err.println(\"Could not establish a connection\");\r\n            e.printStackTrace();\r\n        }\r\n        List<Worker> workerCollection = new ArrayList<Worker>();\r\n        try (Scanner s = new Scanner(System.in)) {\r\n            try (Scanner s1 = new Scanner(System.in)) {\r\n                int di;\r\n                do {\r\n                    System.out.println(\"1.INSERT Data for Worker(s)\"); // User will Insert(create number) 3 varibles, Workers Number, Workers name, Workers Salary\r\n                    System.out.println(\"2.DISPLAY Data for Worker(s)\"); // User can display all Created Workers\r\n                    System.out.println(\"3.SEARCH Data of Worker(s)\"); // User can search database for Workers\r\n                    System.out.println(\"4.DELETE Data of Worker(s)\"); // User can Delete any Worker in the system\r\n                    System.out.println(\"5.UPDATE Data for Worker(s)\");// User can update any information on Worker\r\n                    System.out.println(\"Enter 0 to Exit\");\r\n                    System.out.print(\"Enter Number of Your Choice: \");\r\n                    di = s.nextInt();\r\n\r\n                    switch (di) {\r\n                        case 1:\r\n                            System.out.print(\"Enter Worker's Number starting with 100x : \");\r\n                            int workerNumber = s.nextInt();\r\n                            System.out.print(\"Enter Worker's Name: \");\r\n                            String workerName = s1.nextLine();\r\n                            System.out.print(\"Enter Worker's Salary: \");\r\n                            int workerSalary = s.nextInt();\r\n\r\n                            workerCollection.add(new Worker(workerNumber, workerName, workerSalary));\r\n                            break;\r\n                        case 2:\r\n                            System.out.println(\"-------------------------\");\r\n                            Iterator<Worker> iterator = workerCollection.iterator();\r\n                            while (iterator.hasNext()) {\r\n                                Worker worker = iterator.next();\r\n                                System.out.println(worker);\r\n                            }\r\n                            System.out.println(\"-------------------------\");\r\n                            break;\r\n                        case 3:\r\n                            boolean found = false;\r\n                            System.out.println(\"Enter Worker's Number to Search:\");\r\n                            workerNumber = s.nextInt();\r\n                            System.out.println(\"-------------------------\");\r\n                            iterator = workerCollection.iterator();\r\n                            while (iterator.hasNext()) {\r\n                                Worker worker = iterator.next();\r\n                                if (worker.getWorkerNumber() == workerNumber) {\r\n                                    System.out.println(worker);\r\n                                    found = true;\r\n                                }\r\n                            }\r\n                            if (!found) {\r\n                                System.out.println(\"Worker's Number Not Found\");\r\n                            }\r\n                            System.out.println(\"-------------------------\");\r\n                            break;\r\n                        case 4:\r\n                            found = false;\r\n                            System.out.println(\"Enter Worker's Number to Delete:\");\r\n                            workerNumber = s.nextInt();\r\n                            System.out.println(\"-------------------------\");\r\n                            iterator = workerCollection.iterator();\r\n                            while (iterator.hasNext()) {\r\n                                Worker worker = iterator.next();\r\n                                if (worker.getWorkerNumber() == workerNumber) {\r\n                                    iterator.remove();\r\n                                    found = true;\r\n                                }\r\n                            }\r\n                            if (!found) {\r\n                                System.out.println(\"Worker's Number Not Found\");\r\n                            } else {\r\n                                System.out.println(\"Worker's Number has been Deleted Successfully!\");\r\n                            }\r\n                            System.out.println(\"-------------------------\");\r\n                            break;\r\n                        case 5:\r\n                            found = false;\r\n                            System.out.println(\"Enter Worker's Number to Update Information:\");\r\n                            workerNumber = s.nextInt();\r\n                            ListIterator<Worker> listIterator = workerCollection.listIterator();\r\n                            while (listIterator.hasNext()) {\r\n                                Worker worker = listIterator.next();\r\n                                if (worker.getWorkerNumber() == workerNumber) {\r\n                                    System.out.print(\"Enter New Worker Name:\");\r\n                                    workerName = s1.nextLine();\r\n\r\n                                    System.out.print(\"Enter New Worker Salary:\");\r\n                                    workerSalary = s.nextInt();\r\n                                    listIterator.set(new Worker(workerNumber, workerName, workerSalary));\r\n                                    found = true;\r\n                                }\r\n                            }\r\n                            if (!found) {\r\n                                System.out.println(\"Worker's Number Not Found\");\r\n                            } else {\r\n                                System.out.println(\"Worker's Number has been Updated Successfully!\");\r\n                            }\r\n                            break;\r\n\r\n                    }\r\n                }while (di != 0) ;\r\n            }\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/p0a/cameramanbrayton/workers/EmpApp.java b/src/main/java/com/p0a/cameramanbrayton/workers/EmpApp.java
+--- a/src/main/java/com/p0a/cameramanbrayton/workers/EmpApp.java	(revision 88130b815b3b215baf2b82fa4b273d7f31613f06)
++++ b/src/main/java/com/p0a/cameramanbrayton/workers/EmpApp.java	(date 1661669253800)
+@@ -1,17 +1,13 @@
+ package com.p0a.cameramanbrayton.workers;
++
+ import java.sql.Connection;
+ import java.sql.DriverManager;
+ import java.sql.SQLException;
+-import java.util.ArrayList;
+-import java.util.Iterator;
+-import java.util.List;
+-import java.util.ListIterator;
+-import java.util.Scanner;
+-import org.postgresql.Driver;
++import java.util.*;
+ 
+ class Worker{
+     private final int workerNumber; // Worker Number will begin with 100x, whereas x will be a number beginning with 1 to ∞
+-    private final String workerName; // Worker Name should be Full First and Last with Middle intial.
++    private final String workerName; // Worker Name should be Full First and Last with Middle initial.
+     private final int workerSalary; // Worker Salary will be the Annual yearly salary.
+ 
+     Worker(int workerNumber, String workerName, int workerSalary) {
+@@ -24,14 +20,6 @@
+         return workerNumber;
+     }
+ 
+-    public int getWorkerSalary(){
+-        return workerSalary;
+-    }
+-
+-    public String getWorkerName(){
+-        return workerName;
+-    }
+-
+     public String toString(){
+         return "Worker's Number:" + workerNumber + "/  " + "Worker's Name:" + workerName + "/  " + "Worker's Annual Salary:" + workerSalary;
+     }
+@@ -39,7 +27,7 @@
+ }
+ 
+ class EmpApp {
+-    public EmpApp(int workerNumber, String workerName, int workerSalary) {
++    public EmpApp() {
+ 
+     }
+ 
+@@ -57,12 +45,12 @@
+             System.err.println("Could not establish a connection");
+             e.printStackTrace();
+         }
+-        List<Worker> workerCollection = new ArrayList<Worker>();
++        List<Worker> workerCollection = new ArrayList<>();
+         try (Scanner s = new Scanner(System.in)) {
+             try (Scanner s1 = new Scanner(System.in)) {
+                 int di;
+                 do {
+-                    System.out.println("1.INSERT Data for Worker(s)"); // User will Insert(create number) 3 varibles, Workers Number, Workers name, Workers Salary
++                    System.out.println("1.INSERT Data for Worker(s)"); // User will Insert(create number) 3 variables, Workers Number, Workers name, Workers Salary
+                     System.out.println("2.DISPLAY Data for Worker(s)"); // User can display all Created Workers
+                     System.out.println("3.SEARCH Data of Worker(s)"); // User can search database for Workers
+                     System.out.println("4.DELETE Data of Worker(s)"); // User can Delete any Worker in the system
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+new file mode 100644
+--- /dev/null	(date 1661668196317)
++++ b/.idea/compiler.xml	(date 1661668196317)
+@@ -0,0 +1,13 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="CompilerConfiguration">
++    <annotationProcessing>
++      <profile name="Maven default annotation processors profile" enabled="true">
++        <sourceOutputDir name="target/generated-sources/annotations" />
++        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
++        <outputRelativeToContentRoot value="true" />
++        <module name="workers-app" />
++      </profile>
++    </annotationProcessing>
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/jarRepositories.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/jarRepositories.xml b/.idea/jarRepositories.xml
+new file mode 100644
+--- /dev/null	(date 1661665198539)
++++ b/.idea/jarRepositories.xml	(date 1661665198539)
+@@ -0,0 +1,20 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="RemoteRepositoriesConfiguration">
++    <remote-repository>
++      <option name="id" value="central" />
++      <option name="name" value="Central Repository" />
++      <option name="url" value="https://repo.maven.apache.org/maven2" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="central" />
++      <option name="name" value="Maven Central repository" />
++      <option name="url" value="https://repo1.maven.org/maven2" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="jboss.community" />
++      <option name="name" value="JBoss Community repository" />
++      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
++    </remote-repository>
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+new file mode 100644
+--- /dev/null	(date 1661665198805)
++++ b/.idea/.gitignore	(date 1661665198805)
+@@ -0,0 +1,3 @@
++# Default ignored files
++/shelf/
++/workspace.xml
