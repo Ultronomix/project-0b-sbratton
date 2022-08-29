@@ -1,5 +1,8 @@
 package com.p0a.cameramanbrayton.workers;
 
+import com.p0a.cameramanbrayton.users.User;
+import com.p0a.cameramanbrayton.users.UserDAO;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -35,14 +38,23 @@ class EmpApp {
     }
 
     public static void main(String[] args) {
-        // try with resources
-        try (Connection connection = ConnectionFactory.getInstance().getConnection()) {
-            if (connection != null) {
-                System.out.println("Connection successful!");
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
+        UserDAO userDAO = new UserDAO();
+
+        User newUser = new User();
+        newUser.setGivenName("Chaz");
+        newUser.setSurname("Corlew");
+        newUser.setEmail("chaz123@revature.net");
+        newUser.setUsername("chaz");
+        newUser.setPassword("p$44WORD");
+
+        String newUserId = userDAO.save(newUser);
+        System.out.println(newUserId);
+
+        System.out.println("+-------------------------");
+
+        List<User> users = userDAO.getAllUsers();
+        users.forEach(System.out::println);
 
         List<Worker> workerCollection = new ArrayList<>();
         try (Scanner s = new Scanner(System.in)) {
