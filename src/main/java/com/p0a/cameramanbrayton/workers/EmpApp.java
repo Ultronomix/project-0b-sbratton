@@ -3,12 +3,6 @@ package com.p0a.cameramanbrayton.workers;
 import com.p0a.cameramanbrayton.users.User;
 import com.p0a.cameramanbrayton.users.UserDAO;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.*;
 
 class Worker{
@@ -39,9 +33,11 @@ class EmpApp {
 
     public static void main(String[] args) {
 
-        UserDAO userDAO = new UserDAO();
+        // UserDAO userDAO = new UserDAO();
 
-        User newUser = new User();
+        // org.postgresql.util.PSQLException: ERROR: INSERT has more target columns than expressions java
+        /* User newUser = new User();
+        newUser.setId(" ");
         newUser.setGivenName("Chaz");
         newUser.setSurname("Corlew");
         newUser.setEmail("chaz123@revature.net");
@@ -51,10 +47,10 @@ class EmpApp {
         String newUserId = userDAO.save(newUser);
         System.out.println(newUserId);
 
-        System.out.println("+-------------------------");
+        System.out.println("+-------------------------");*/
 
-        List<User> users = userDAO.getAllUsers();
-        users.forEach(System.out::println);
+      /*  List<User> users = userDAO.getAllUsers();
+        users.forEach(System.out::println); */
 
         List<Worker> workerCollection = new ArrayList<>();
         try (Scanner s = new Scanner(System.in)) {

@@ -2,10 +2,12 @@ package com.p0a.cameramanbrayton.users;
 
 import com.p0a.cameramanbrayton.workers.ConnectionFactory;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 // DAO = Data Access Object
 public class UserDAO {
@@ -45,10 +47,11 @@ public class UserDAO {
         return allUsers;
 
     }
+    // org.postgresql.util.PSQLException: ERROR: INSERT has more target columns than expressions java
 
-    public String save(User user) {
+    /* public String save(User user) {
 
-        String sql = "INSERT INTO app_users (given_name, surname, email, username, password, role_id) " +
+        String sql = "INSERT INTO app_users (id, given_name, surname, email, username, password, role_id) " +
                      "VALUES (?, ?, ?, ?, ?)";
 
         try (Connection connection = ConnectionFactory.getInstance().getConnection()) {
@@ -62,8 +65,6 @@ public class UserDAO {
 
             preparedStatement.executeUpdate();
 
-            connection.commit();
-
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             resultSet.next();
             user.setId(resultSet.getString("id"));
@@ -75,6 +76,6 @@ public class UserDAO {
 
         return user.getId();
 
-    }
+    }*/
 
 }
